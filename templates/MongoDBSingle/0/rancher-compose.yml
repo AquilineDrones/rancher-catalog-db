@@ -5,19 +5,19 @@ catalog:
   description: "MongoDB"
   uuid: mongodb-1
   minimum_rancher_version: v0.46.0
-    questions:
-      - variable: mongo_scale
-        description: "How many containers the MongoDB will scale to?"
-        label: "mongo scale"
-        type: "int"
-        required: true
-        default: "1"
-      - variable: default_admin_pwd
-        description: "Default admin password"
-        label: "default admin password"
-        type: "password"
-        required: true
-        default: ""
+  questions:
+    - variable: mongo_scale
+      description: "How many containers the MongoDB will scale to?"
+      label: "mongo scale"
+      type: "int"
+      required: true
+      default: "1"
+    - variable: default_admin_pwd
+      description: "Default admin password"
+      label: "default admin password"
+      type: "password"
+      required: true
+      default: ""
 
 services:
   mongo:
