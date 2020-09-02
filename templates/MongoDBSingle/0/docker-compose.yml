@@ -1,20 +1,19 @@
-version: '2'
+version: 2
+
 services:
-  mongo-cluster:
+
+  mongo:
+    image: mongo
     restart: always
     environment:
-      MONGO_SERVICE_NAME: mongo-cluster
-      CATTLE_SCRIPT_DEBUG: ${debug}
       MONGO_INITDB_ROOT_USERNAME: root
-      MONGO_INITDB_ROOT_PASSWORD: ${default_admin_pwd}
-    entrypoint: /opt/rancher/bin/entrypoint.sh
-    command:
-    - --auth
-    image: mongo:3.4
-    labels:
-      io.rancher.scheduler.affinity:container_label_ne: io.rancher.stack_service.name=$${stack_name}/$${service_name}
-      io.rancher.scheduler.affinity:host_label: ${host_label}
-      io.rancher.container.hostname_override: container_name
-      io.database.role: spartacus-db
+      MONGO_INITDB_ROOT_PASSWORD: example
+
+  mongo-express:
+    image: mongo-express
+    restart: always
     ports:
-      - 27017:27017/tcp
+      - 8081:8081
+    environment:
+      ME_CONFIG_MONGODB_ADMINUSERNAME: root
+      ME_CONFIG_MONGODB_ADMINPASSWORD: example
