@@ -42,6 +42,12 @@ catalog:
       type: "int"
       required: true
       default: "3"
+    - variable: default_admin_pwd
+      description: "Default admin password"
+      label: "default admin password"
+      type: "string"
+      required: true
+      default: ""
 services:
   mongo-cluster:
     scale: ${mongo_scale}
