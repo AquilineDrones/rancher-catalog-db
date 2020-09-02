@@ -6,7 +6,7 @@ services:
       MONGO_SERVICE_NAME: mongo-cluster
       CATTLE_SCRIPT_DEBUG: ${debug}
       MONGO_INITDB_ROOT_USERNAME: root
-      MONGO_INITDB_ROOT_PASSWORD: ${default_admin_pwd}
+      MONGO_INITDB_ROOT_PASSWORD: root
     entrypoint: /opt/rancher/bin/entrypoint.sh
     command:
     - --auth

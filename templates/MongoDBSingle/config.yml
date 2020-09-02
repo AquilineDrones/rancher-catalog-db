@@ -1,0 +1,5 @@
+name: MongoDBSingle
+description: |
+  MongoDB.
+version: "3.4-rancher1"
+category: Databases
