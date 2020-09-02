@@ -1,0 +1,8 @@
+name: TPWeb
+description: |
+  TPWeb is the front-end web portal for TPP
+version: 1.0
+category: Web
+maintainer: Aquiline Drones <devteam@aquilinedrones.com>
+license: GNU
+projectURL: https://code.aquilinedrones.com/aquiline/farmcat
