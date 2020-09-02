@@ -15,7 +15,6 @@ services:
       io.rancher.scheduler.affinity:container_label_ne: io.rancher.stack_service.name=$${stack_name}/$${service_name}
       io.rancher.scheduler.affinity:host_label: ${host_label}
       io.rancher.container.hostname_override: container_name
-      io.rancher.sidekicks: mongo-base, mongo-datavolume
       io.database.role: spartacus-db
     ports:
       - 27017:27017/tcp
