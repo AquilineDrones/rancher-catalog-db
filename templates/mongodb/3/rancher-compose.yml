@@ -41,11 +41,11 @@ catalog:
       label: "mongo scale"
       type: "int"
       required: true
-      default: "3"
+      default: "1"
     - variable: default_admin_pwd
       description: "Default admin password"
       label: "default admin password"
-      type: "string"
+      type: "password"
       required: true
       default: ""
 services:
