@@ -42,6 +42,7 @@ services:
 {{- if eq .Values.DEBUG_MODE "true" }}
       TPP_LOG_LEVEL: 1
       TPP_DBGMODE: "true"
+      APP_ENV: "development"
 {{- end }}
 
     # -----------------------------------
