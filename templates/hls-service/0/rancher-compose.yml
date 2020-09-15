@@ -113,7 +113,7 @@ services:
     health_check:
       response_timeout: 2000
       healthy_threshold: 5
-      port: 80
+      port: 3333
       unhealthy_threshold: 10
       initializing_timeout: 600000
       interval: 10000
