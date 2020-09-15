@@ -47,14 +47,14 @@ catalog:
       label: "Raw videos volume name"
       type: string
       required: true
-      default: ''
+      default: 'tpp_video'
 
     - variable: PUBLIC_VIDEO_VOLUME
       description: "Volume for the public (processed) video files"
       label: "Public videos volume name"
       type: string
       required: true
-      default: ''
+      default: 'webserver_www'
 
     # --- COMMON
     - variable: host_affinity_label
