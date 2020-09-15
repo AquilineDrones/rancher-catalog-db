@@ -26,6 +26,7 @@ catalog:
       description: "Use a custom image. This will override value of Main Image."
       required: false
       type: string
+      default: "aquilinedrones/hls-service:1.0.1"
 
     - variable: TPMAN_URL
       description: "FQDN to Tpman. External users must be able to visit this domain."
