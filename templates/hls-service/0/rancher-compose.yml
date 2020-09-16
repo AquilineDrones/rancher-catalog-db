@@ -108,7 +108,7 @@ catalog:
       default: 1024
 
 services:
-  hlsService:
+  hlsservice:
     scale: 1
     retain_ip: true
     health_check:
