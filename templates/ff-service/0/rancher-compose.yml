@@ -1,8 +1,8 @@
 version: '2'
 catalog:
-  name: "HLS Video service"
+  name: "FF Video service"
   version: "1.0"
-  description: "video Streaming service"
+  description: "Lesson tracking service"
   questions:
     # --- COMMON
     - variable: CUSTOM_REGISTRY
@@ -16,17 +16,17 @@ catalog:
       label: "Main Image"
       description: "Image to use"
       required: true
-      default: "aquilinedrones/hls-service:1.0.1"
+      default: "aquilinedrones/ff-service:1.0.0"
       type: enum
       options:
-        - aquilinedrones/hls-service:1.0.1
+        - aquilinedrones/ff-service:1.0.0
 
     - variable: CUSTOM_IMAGE
       label: "Custom Image"
       description: "Use a custom image. This will override value of Main Image."
       required: false
       type: string
-      default: "aquilinedrones/hls-service:1.0.1"
+      default: "aquilinedrones/ff-service:1.0.0"
 
     - variable: TPMAN_URL
       description: "FQDN to Tpman. External users must be able to visit this domain."
@@ -42,19 +42,34 @@ catalog:
       required: true
       default: false
 
-    - variable: RAW_VIDEO_VOLUME
-      description: "Volume for the raw (complete) video files"
-      label: "Raw videos volume name"
-      type: string
-      required: true
-      default: 'tpp_video'
+    # --- DB
+    - variable: "db_service"
+      description: "External DB service to use. You can reference the service as 'db' by setting this."
+      label: "DB Service"
+      default: ""
+      required: false
+      type: "service"
 
-    - variable: PUBLIC_VIDEO_VOLUME
-      description: "Volume for the public (processed) video files"
-      label: "Public videos volume name"
-      type: string
+    - variable: dbname
+      description: "Name of database to use"
+      label: "Database Name"
+      type: "string"
       required: true
-      default: 'webserver_www'
+      default: "ff-service"
+
+    - variable: dbuser
+      description: "Username to login to the database"
+      label: "Database Username"
+      type: "string"
+      required: true
+      default: "administrator"
+
+    - variable: dbpassword
+      description: "User password to login to the database"
+      label: "Database Password"
+      type: "password"
+      required: true
+      default: "DatabasePassword"
 
     # --- COMMON
     - variable: host_affinity_label
@@ -108,7 +123,7 @@ catalog:
       default: 1024
 
 services:
-  hlsservice:
+  ffservice:
     scale: 1
     retain_ip: true
     health_check:

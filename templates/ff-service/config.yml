@@ -1,0 +1,8 @@
+name: FFService
+description: |
+  Lesson tracking service
+version: 1.0
+category: Web
+maintainer: Aquiline Drones <devteam@aquilinedrones.com>
+license: UNLICENSED
+projectURL: http://code.aquilinedrones.com/AquilineDrones/ff-service.git
