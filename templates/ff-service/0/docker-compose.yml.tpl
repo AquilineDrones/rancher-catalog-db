@@ -14,7 +14,7 @@ services:
   # SERVICE
   # - primary application
   # ************************************
-  hlsService:
+  ffService:
 
     # -----------------------------------
     # Image
