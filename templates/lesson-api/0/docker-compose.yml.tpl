@@ -47,6 +47,7 @@ services:
     environment:
       USERMAN_API: "${TPMAN_URL}"
       DB_HOST: db
+      DB_PORT: 3306
       DB_USER: "${dbuser}"
       DB_PASS: "${dbpassword}"
       DB_NAME: "${dbname}"
