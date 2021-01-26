@@ -57,11 +57,9 @@ services:
       - ${db_service}:db
 
     links:
-      - db
       - redis
 
     depends_on:
-      - db
       - redis
 
     # -----------------------------------
