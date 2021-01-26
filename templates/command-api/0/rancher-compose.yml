@@ -77,7 +77,7 @@ catalog:
     - variable: keycloakPassword
       description: "Keycloak: password"
       label: "Keycloak: password"
-      type: "string"
+      type: "password"
       required: true
       default: "<PASSWORD>"
 
@@ -86,7 +86,7 @@ catalog:
       description: "CORS: allowed domains"
       label: "CORS: allowed domains"
       type: "string"
-      required: true
+      required: false
       default: "https://command-api.aquiline.io"
 
     # --- DB
