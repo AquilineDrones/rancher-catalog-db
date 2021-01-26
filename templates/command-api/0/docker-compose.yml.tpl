@@ -66,17 +66,26 @@ services:
     # ENV
     # -----------------------------------
     environment:
-      USERMAN_API: "${TPMAN_URL}"
+      DB_DIALECT: mariadb
       DB_HOST: db
       DB_PORT: 3306
       DB_USER: "${dbuser}"
       DB_PASS: "${dbpassword}"
       DB_NAME: "${dbname}"
-      DB_DIALECT: mariadb
 
-      KEYCLOAK_BASE_URL: "${keycloakBaseUrl}"
       NODE_ENV: production
       REDIS_HOST: 'redis'
+      USERMAN_API: "${TPMAN_URL}"
+
+      ALLOWED_DOMAINS: "${allowedDomains}"
+
+      KEYCLOAK_BASE_URL: "${keycloakBaseUrl}"
+      KEYCLOAK_REALM_NAME: "${keycloakRealmName}"
+      KEYCLOAK_USERNAME: "${keycloakUsername}"
+      KEYCLOAK_PASSWORD: "${keycloakPassword}"
+      KEYCLOAK_CLIENT_ID: "${keycloakClientId}"
+      KEYCLOAK_GRANT_TYPE: "password"
+
 
     # -----------------------------------
     # Scheduler labels

@@ -1,7 +1,7 @@
 version: '2'
 
 x-variables:
-  base_image: &base_image aquilinedrones/command-api:1.0.0
+  base_image: &base_image aquilinedrones/command-api:0.1.2
 
 catalog:
   name: "Command API"
@@ -46,6 +46,48 @@ catalog:
       required: true
       default: https://account.aquiline.io/auth
 
+    - variable: keycloakRealmName
+      description: "Keycloak: realm name"
+      label: "Keycloak: realm name"
+      type: "string"
+      required: true
+      default: aquiline.io
+
+    - variable: keycloakClientId
+      description: "Keycloak: client id"
+      label: "Keycloak: client id"
+      type: "string"
+      required: true
+      default: tpman
+
+    - variable: keycloakUsername
+      description: "Keycloak: user name"
+      label: "Keycloak: user name"
+      type: "string"
+      required: true
+      default: c2@aquilinedrones.com
+
+    - variable: keycloakUsername
+      description: "Keycloak: user name"
+      label: "Keycloak: user name"
+      type: "string"
+      required: true
+      default: c2@aquilinedrones.com
+
+    - variable: keycloakPassword
+      description: "Keycloak: password"
+      label: "Keycloak: password"
+      type: "string"
+      required: true
+      default: "<PASSWORD>"
+
+    # ---
+    - variable: allowedDomains
+      description: "CORS: allowed domains"
+      label: "CORS: allowed domains"
+      type: "string"
+      required: true
+      default: "https://command-api.aquiline.io"
 
     # --- DB
     - variable: "db_service"
