@@ -1,0 +1,8 @@
+name: commandapi
+description: |
+  Operation management service
+version: 1.0
+category: Web
+maintainer: Aquiline Drones <devteam@aquilinedrones.com>
+license: UNLICENSED
+projectURL: http://code.aquilinedrones.com/AquilineDrones/command-api.git

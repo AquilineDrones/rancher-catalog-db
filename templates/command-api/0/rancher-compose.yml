@@ -1,0 +1,144 @@
+version: '2'
+
+x-variables:
+  base_image: &base_image aquilinedrones/command-api:1.0.0
+
+catalog:
+  name: "Command API"
+  version: "1.0"
+  description: "Operation management service"
+  questions:
+    # --- COMMON
+    - variable: CUSTOM_REGISTRY
+      description: "Pull from private registry. Leave blank to pull from public Docker Hub."
+      label: "Private Registry"
+      type: string
+      required: false
+
+    # ---- CUSTOM
+    - variable: MAIN_IMAGE
+      label: "Main Image"
+      description: "Image to use"
+      required: true
+      default: *base_image
+      type: enum
+      options:
+        - *base_image
+
+    - variable: CUSTOM_IMAGE
+      label: "Custom Image"
+      description: "Use a custom image. This will override value of Main Image."
+      required: false
+      type: string
+      default: *base_image
+
+    - variable: TPMAN_URL
+      description: "FQDN to Tpman. External users must be able to visit this domain."
+      label: "Tpman Domain"
+      type: "string"
+      required: true
+      default: https://tpp.aquiline.io
+
+    - variable: keycloakBaseUrl
+      description: "FQDN to Keycloak SSO. External users must be able to visit this domain."
+      label: "Keycloak base url"
+      type: "string"
+      required: true
+      default: https://account.aquiline.io/auth
+
+
+    # --- DB
+    - variable: "db_service"
+      description: "External DB service to use. You can reference the service as 'db' by setting this."
+      label: "DB Service"
+      default: ""
+      required: true
+      type: "service"
+
+    - variable: dbname
+      description: "Name of database to use"
+      label: "Database Name"
+      type: "string"
+      required: true
+      default: "commandapi"
+
+    - variable: dbuser
+      description: "Username to login to the database"
+      label: "Database Username"
+      type: "string"
+      required: true
+      default: "root"
+
+    - variable: dbpassword
+      description: "User password to login to the database"
+      label: "Database Password"
+      type: "password"
+      required: true
+      default: "<DatabasePassword>"
+
+    # --- COMMON
+    - variable: host_affinity_label
+      description: "The stack will launch on one of the hosts that has this label."
+      label: "Host Affinity Label"
+      type: string
+      required: false
+
+    # --- COMMON
+    - variable: repull_image
+      description: "Pull from registry source even if the host already have a local image with the same tag."
+      label: "Reload Images"
+      type: enum
+      options:
+        - always
+        - never
+      required: true
+      default: "never"
+
+    # --- COMMON
+    - variable: docker_memory_limit
+      label: "Limit Memory"
+      description: "Maxiumum memory that each container can use (in megabytes). Defaults to unlimited. Do not specify a value lower than 4."
+      type: int
+      required: false
+
+    - variable: docker_memory_kernel_limit
+      label: "Limit Kernel Memory"
+      description: |
+        Maximum kernel memory that each container can use (in megabytes). Defaults to unlimited. If this value is lower than Limit Memory,
+        the container will experience OOM error if it runs out of kernel memory, unless memory is unlimited, in which case it will wait
+        for memory released.
+      type: int
+      required: false
+
+    # --- COMMON
+    - variable: docker_cpu_quota_limit
+      label: "Limit CPUs"
+      description: |
+        Limit CPU resources (in multiples of 100,000 microseconds). Defaults to unlimited. For example, "150000" limits the container
+        to 1.5 CPUs.
+      type: int
+      required: false
+
+    - variable: docker_cpu_weight_limit
+      label: "CPU Weight"
+      description: |
+        A number lower than the default will have less priority when competing for CPU resources and vice verse.
+      type: int
+      required: true
+      default: 1024
+
+services:
+  commandapi:
+    scale: 1
+    retain_ip: true
+    start_on_create: true
+    health_check:
+      request_line: GET "/healthcheck" "HTTP/1.0"
+      port: 4200
+      interval: 10000
+      initializing_timeout: 600000
+      reinitializing_timeout: 120000
+      response_timeout: 2000
+      healthy_threshold: 5
+      unhealthy_threshold: 10
+      strategy: recreate
