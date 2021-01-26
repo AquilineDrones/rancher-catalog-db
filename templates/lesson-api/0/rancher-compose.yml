@@ -1,6 +1,6 @@
 version: '2'
 catalog:
-  name: "FF Video service"
+  name: "FF Lesson service"
   version: "1.0"
   description: "Lesson tracking service"
   questions:
@@ -99,7 +99,7 @@ catalog:
     - variable: docker_memory_kernel_limit
       label: "Limit Kernel Memory"
       description: |
-        Maxiumum kernel memory that each container can use (in megabytes). Defaults to unlimited. If this value is lower than Limit Memory,
+        Maximum kernel memory that each container can use (in megabytes). Defaults to unlimited. If this value is lower than Limit Memory,
         the container will experience OOM error if it runs out of kernel memory, unless memory is unlimited, in which case it will wait
         for memory released.
       type: int
@@ -123,16 +123,17 @@ catalog:
       default: 1024
 
 services:
-  ffservice:
+  lessonapi:
     scale: 1
     retain_ip: true
+    start_on_create: true
     health_check:
+      request_line: GET "/healthcheck" "HTTP/1.0"
+      port: 4200
+      interval: 10000
+      initializing_timeout: 600000
+      reinitializing_timeout: 120000
       response_timeout: 2000
       healthy_threshold: 5
-      port: 4200
       unhealthy_threshold: 10
-      initializing_timeout: 600000
-      interval: 5000
       strategy: recreate
-      request_line: GET "/healthcheck" "HTTP/1.0"
-      reinitializing_timeout: 120000

@@ -1,0 +1,8 @@
+name: TPPD
+description: |
+  TPPD is the API daemon for TPP
+version: 1.0
+category: Authentication
+maintainer: Aquiline Drones <devteam@aquilinedrones.com>
+license: GNU
+projectURL: https://code.aquilinedrones.com/aquiline/farmcat
