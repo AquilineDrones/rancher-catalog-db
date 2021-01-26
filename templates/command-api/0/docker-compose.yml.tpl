@@ -4,7 +4,7 @@
 # - https://rancher.com/docs/rancher/v1.6/en/cli/variable-interpolation/#templating
 # - https://docs.docker.com/compose/compose-file/compose-file-v2/
 # #####################################################################
-version: '3.4'
+version: '2'
 
 volumes:
   redis_data:
