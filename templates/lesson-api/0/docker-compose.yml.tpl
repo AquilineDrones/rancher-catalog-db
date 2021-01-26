@@ -14,7 +14,7 @@ services:
   # SERVICE
   # - primary application
   # ************************************
-  ffService:
+  lessonapi:
 
     # -----------------------------------
     # Image
@@ -59,23 +59,10 @@ services:
 {{- end }}
 
     # -----------------------------------
-    # VOLUMES
-    # - https://docs.docker.com/compose/compose-file/compose-file-v2/#volumes
-    # - specify vol name to use the specified volume
-    # - just write path to create dynamic named volume
-    # -----------------------------------
-    volumes:
-{{- if (.Values.RAW_VIDEO_VOLUME) }}
-      - ${RAW_VIDEO_VOLUME}:/app/storage/raw:ro
-{{-   else }}
-      - /app/storage/raw
-{{- end }}
-
-    # -----------------------------------
     # Scheduler labels
     # -----------------------------------
     labels:
-      io.tpp.role: "{{ .Stack.Name }}/portal"
+      io.tpp.role: "{{ .Stack.Name }}/service"
       io.tpp.portal: spread
       io.rancher.scheduler.affinity:container_label_soft_ne: io.tpp.portal=spread
 {{- if (.Values.host_affinity_label) }}

@@ -35,13 +35,6 @@ catalog:
       required: true
       default: https://tpp.aquiline.io
 
-    - variable: DEBUG_MODE
-      description: "Runs frontend in debug mode. Do not enable this in production."
-      label: "Enable Debug Mode"
-      type: boolean
-      required: true
-      default: false
-
     # --- DB
     - variable: "db_service"
       description: "External DB service to use. You can reference the service as 'db' by setting this."
