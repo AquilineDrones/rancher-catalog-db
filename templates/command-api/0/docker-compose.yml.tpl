@@ -74,8 +74,10 @@ services:
       DB_NAME: "${dbname}"
 
       NODE_ENV: production
-      REDIS_HOST: 'redis'
+
       USERMAN_API: "${TPMAN_URL}"
+      REDIS_HOST: 'redis'
+      REDIS_PORT: 6379
 
       ALLOWED_DOMAINS: "${allowedDomains}"
 
