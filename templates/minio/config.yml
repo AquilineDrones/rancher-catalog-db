@@ -1,0 +1,8 @@
+name: Minio
+description: |
+  Service to store objects
+version: 1.0
+category: Web
+maintainer: Aquiline Drones <devteam@aquilinedrones.com>
+license: UNLICENSED
+projectURL: https://code.aquilinedrones.com/AquilineDrones/dev-env-minio
