@@ -1,0 +1,116 @@
+version: '2'
+catalog:
+  name: "Minio"
+  version: "1.0"
+  description: "Minio"
+  questions:
+    # --- COMMON
+    - variable: CUSTOM_REGISTRY
+      description: "Pull from private registry. Leave blank to pull from public Docker Hub."
+      label: "Private Registry"
+      type: string
+      required: false
+
+    # ---- CUSTOM
+    - variable: MAIN_IMAGE
+      label: "Main Image"
+      description: "Image to use"
+      required: true
+      default: "aquilinedrones/dev-env-minio:latest"
+      type: enum
+      options:
+        - aquilinedrones/dev-env-minio:latest
+
+    - variable: CUSTOM_IMAGE
+      label: "Custom Image"
+      description: "Use a custom image. This will override value of Main Image."
+      required: false
+      type: string
+      default: "aquilinedrones/dev-env-minio"
+
+    - variable: RAW_VIDEO_VOLUME
+      description: "Volume for the raw (complete) minio files"
+      label: "Raw minio volume name"
+      type: string
+      required: true
+      default: '/data'
+
+    - variable: MINIO_ROOT_USER
+      description: "Minio root user to access in the application"
+      label: "Minio root user"
+      type: string
+      required: true
+      default: "minioadmin"
+
+    - variable: MINIO_ROOT_PASSWORD
+      description: "Minio root password to access in the application"
+      label: "Minio root password"
+      type: "password"
+      required: true
+      default: "minioadmin"
+
+    # --- COMMON
+    - variable: host_affinity_label
+      description: "The stack will launch on one of the hosts that has this label."
+      label: "Host Affinity Label"
+      type: string
+      required: false
+
+    # --- COMMON
+    - variable: repull_image
+      description: "Pull from registry source even if the host already have a local image with the same tag."
+      label: "Reload Images"
+      type: enum
+      options:
+        - always
+        - never
+      required: true
+      default: "never"
+
+    # --- COMMON
+    - variable: docker_memory_limit
+      label: "Limit Memory"
+      description: "Maxiumum memory that each container can use (in megabytes). Defaults to unlimited. Do not specify a value lower than 4."
+      type: int
+      required: false
+
+    - variable: docker_memory_kernel_limit
+      label: "Limit Kernel Memory"
+      description: |
+        Maxiumum kernel memory that each container can use (in megabytes). Defaults to unlimited. If this value is lower than Limit Memory,
+        the container will experience OOM error if it runs out of kernel memory, unless memory is unlimited, in which case it will wait
+        for memory released.
+      type: int
+      required: false
+
+    # --- COMMON
+    - variable: docker_cpu_quota_limit
+      label: "Limit CPUs"
+      description: |
+        Limit CPU resources (in multiples of 100,000 microseconds). Defaults to unlimited. For example, "150000" limits the container
+        to 1.5 CPUs.
+      type: int
+      required: false
+
+    - variable: docker_cpu_weight_limit
+      label: "CPU Weight"
+      description: |
+        A number lower than the default will have less priority when competing for CPU resources and vice verse.
+      type: int
+      required: true
+      default: 1024
+
+services:
+  minio:
+    scale: 1
+    retain_ip: true
+    health_check:
+      response_timeout: 2000
+      healthy_threshold: 5
+      port: 3333
+      unhealthy_threshold: 10
+      initializing_timeout: 600000
+      interval: 5000
+      strategy: recreate
+      request_line: GET "/healthcheck" "HTTP/1.0"
+      reinitializing_timeout: 120000
