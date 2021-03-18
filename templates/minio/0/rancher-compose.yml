@@ -107,10 +107,10 @@ services:
     health_check:
       response_timeout: 2000
       healthy_threshold: 5
-      port: 3333
+      port: 9000
       unhealthy_threshold: 10
       initializing_timeout: 600000
       interval: 5000
       strategy: recreate
-      request_line: GET "/healthcheck" "HTTP/1.0"
+      request_line: GET "/minio/health/live" "HTTP/1.0"
       reinitializing_timeout: 120000
